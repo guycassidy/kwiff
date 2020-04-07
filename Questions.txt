@@ -1,0 +1,8 @@
+1. Not sure what you expected me to provide here, given that the whole assessment was capped at 30 minutes. If you're looking for an example architecture for such a task using cloud technology, I could build a microservice in AWS.
+The Architecture would be an API Gateway that takes a POST request. The 3rd party service can use an API Key to gain authorization to post messages. Further security measures can be made (for example, if we want to restrict to IP addresses, etc.).
+If authorized, the HTTP event will trigger a Lambda function to store the data in the database. Depending on the overall architecture of the business, this can be an independent database for this service or a more extensive database.
+If the server gets a dedicated database, then the nature of the data and application requirements would dictate the choice of a database (AWS currently has eight types of databases).
+2. JS File in the repo.
+3. The main difference is that in myDbFunction you first try to insert and then update if the record already exists, and in myOtherDbFunc you first try to update and then insert if the record doesn't exist. 
+The first option has the advantage of simplicity in regards to code maintenance. With that out of the equation, and if performance is the only deciding factor, then the most advantageous method would be dependant on what would succeed the fastest. Is it more likely that rows will need to be updated or more likely that the method would be called to insert new rows,
+Another potential advantage for the first method relates to the overall architecture. If this method is expected to be called from multiple services at the same time (for example, multiple regions, DB replicas, etc.), it may or may not have an advantage, depending on the setup.
